@@ -10,6 +10,26 @@ app.use((req, res, next) => {
   next();
 });
 
+/*
+app.get(
+  "/now",
+  function(req, res, next){
+    req.time = new Date().toString();
+    next();
+  },
+  function(req,res){
+    res.json({"time": req.time});
+  });
+*/
+
+app.get('/now', (req, res, next) => {
+  req.time = new Date().toString();
+  next();
+}, (req, res) => {
+  let time_obj = {'time': req.time};
+  res.json(time_obj);
+});
+
 //app.get("/", (req, res) => res.send("Hello Express"))
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/views/index.html"));
